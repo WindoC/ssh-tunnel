@@ -1,20 +1,9 @@
 name: Docker Image
 
 on:
-  push:
-    branches:
-      - main
-      - master
+  create:
     tags:
-      - "*"
-  release:
-    types:
-      - published
-  pull_request:
-    branches:
-      - main
-      - master
-  workflow_dispatch:
+      - v*
 
 permissions:
   contents: read
@@ -47,6 +36,7 @@ jobs:
 
           echo "docker_image=${DOCKER_IMAGE}" >> "${GITHUB_OUTPUT}"
           echo "version=${VERSION}" >> "${GITHUB_OUTPUT}"
+          echo "tags=${TAGS}"
           echo "tags=${TAGS}" >> "${GITHUB_OUTPUT}"
 
       - name: Set up QEMU
