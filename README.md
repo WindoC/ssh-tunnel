@@ -13,12 +13,6 @@ Containerized SSH client for local port forwarding (`ssh -L`) with support for m
   3. Verify passwordless SSH.
   4. Print ready-to-use `docker run`, `docker-compose.yaml`, and Kubernetes YAML examples.
 
-## Build
-
-```bash
-docker build -t ssh-tunnel:local .
-```
-
 ## GitHub Actions image build
 
 Workflow file: `.github/workflows/docker-image.yml`
@@ -56,7 +50,7 @@ docker run -d --name ssh-tunnel \
   -e SSH_USER=tunnel-user \
   -e SSH_TUNNELS='15432:127.0.0.1:5432,16379:127.0.0.1:6379' \
   -e SSH_PRIVATE_KEY="$(cat ./id_ed25519)" \
-  ssh-tunnel:local
+  ghcr.io/windoc/ssh-tunnel:latest
 ```
 
 ### Optional env
@@ -74,7 +68,7 @@ docker run -d --name ssh-tunnel \
 Run interactive bootstrap:
 
 ```bash
-docker run --rm -it ssh-tunnel:local helper
+docker run --rm -it ghcr.io/windoc/ssh-tunnel:latest helper
 ```
 
 Flow:
@@ -93,3 +87,11 @@ Use [docker-compose.yaml](docker-compose.yaml).
 ## Kubernetes example
 
 Use [kubernetes.yaml](kubernetes.yaml).
+
+## Build
+
+```bash
+docker build -t ssh-tunnel:local .
+```
+
+Replace `ghcr.io/windoc/ssh-tunnel:latest` by `ssh-tunnel:local` in the belows if you would like to use the image build by yourself above.
