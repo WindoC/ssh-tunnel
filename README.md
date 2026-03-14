@@ -13,15 +13,6 @@ Containerized SSH client for local port forwarding (`ssh -L`) with support for m
   3. Verify passwordless SSH.
   4. Print ready-to-use `docker run`, `docker-compose.yaml`, and Kubernetes YAML examples.
 
-## GitHub Actions image build
-
-Workflow file: `.github/workflows/docker-image.yml`
-
-- On push to `main`/`master`: build and push image to GHCR.
-- On tag `v*`: build and push tag image.
-- On pull request: build only (no push).
-- Image name: `ghcr.io/<owner>/<repo>`.
-
 ## Runtime mode (`tunnel`)
 
 ### Required env
