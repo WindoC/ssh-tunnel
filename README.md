@@ -85,4 +85,4 @@ Use [kubernetes.yaml](kubernetes.yaml).
 docker build -t ssh-tunnel:local .
 ```
 
-Replace `ghcr.io/windoc/ssh-tunnel:latest` by `ssh-tunnel:local` in the belows if you would like to use the image build by yourself above.
+Replace `ghcr.io/windoc/ssh-tunnel:latest` by `ssh-tunnel:local` if you would like to use the image build by yourself.
