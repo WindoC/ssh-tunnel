@@ -1,0 +1,18 @@
+services:
+  ssh-tunnel:
+    image: ghcr.io/windoc/ssh-tunnel:latest
+    container_name: ssh-tunnel
+    restart: unless-stopped
+    ports:
+      - "15432:15432"
+      - "16379:16379"
+    environment:
+      SSH_HOST: "10.0.0.5"
+      SSH_PORT: "22"
+      SSH_USER: "tunnel-user"
+      SSH_TUNNELS: "15432:127.0.0.1:5432,16379:127.0.0.1:6379"
+      SSH_STRICT_HOST_KEY_CHECKING: "accept-new"
+      SSH_PRIVATE_KEY: |
+        -----BEGIN OPENSSH PRIVATE KEY-----
+        REPLACE_WITH_YOUR_PRIVATE_KEY
+        -----END OPENSSH PRIVATE KEY-----

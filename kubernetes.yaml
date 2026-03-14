@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ssh-tunnel
+  labels:
+    app: ssh-tunnel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ssh-tunnel
+  template:
+    metadata:
+      labels:
+        app: ssh-tunnel
+    spec:
+      containers:
+        - name: ssh-tunnel
+          image: ghcr.io/windoc/ssh-tunnel:latest
+          args: ["tunnel"]
+          env:
+            - name: SSH_HOST
+              value: "10.0.0.5"
+            - name: SSH_PORT
+              value: "22"
+            - name: SSH_USER
+              value: "tunnel-user"
+            - name: SSH_TUNNELS
+              value: "15432:127.0.0.1:5432,16379:127.0.0.1:6379"
+            - name: SSH_PRIVATE_KEY
+              value: |
+                -----BEGIN OPENSSH PRIVATE KEY-----
+                REPLACE_WITH_YOUR_PRIVATE_KEY
+                -----END OPENSSH PRIVATE KEY-----
+          ports:
+            - name: tunnel-15432
+              containerPort: 15432
+              protocol: TCP
+            - name: tunnel-16379
+              containerPort: 16379
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ssh-tunnel
+  labels:
+    app: ssh-tunnel
+spec:
+  type: ClusterIP
+  selector:
+    app: ssh-tunnel
+  ports:
+    - name: tunnel-15432
+      port: 15432
+      targetPort: 15432
+      protocol: TCP
+    - name: tunnel-16379
+      port: 16379
+      targetPort: 16379
+      protocol: TCP

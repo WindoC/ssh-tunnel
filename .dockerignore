@@ -1,0 +1,9 @@
+.git
+.gitignore
+.DS_Store
+README.md
+AGENTS.md
+ai-request.md
+example.gitlab-ci.yml
+docker-compose.yaml
+helm

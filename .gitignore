@@ -1,0 +1,28 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Python cache (in case helper scripts are added later)
+__pycache__/
+*.pyc
+
+# Node cache (in case docs tooling is added later)
+node_modules/
+
+# Kubernetes local render/output files
+*.rendered.yaml
